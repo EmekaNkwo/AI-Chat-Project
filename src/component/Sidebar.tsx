@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Layout, Menu, Progress } from "antd";
+import { Menu, Progress } from "antd";
 import { bottomSidebarItems, topSidebarItems } from "@/shared/constant";
 import IconLogo from "@/assets/IconLogo";
 import { MdAdd } from "react-icons/md";
-const { Sider } = Layout;
 
 const Sidebar = (): JSX.Element => {
   const handleMenuClick = (key: string) => {

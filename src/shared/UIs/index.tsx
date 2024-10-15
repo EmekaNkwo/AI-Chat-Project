@@ -40,12 +40,17 @@ export const ActionIcon = ({ icon }: { icon: JSX.Element }) => {
 export const IconWithText = ({
   icon,
   text,
+  onClick,
 }: {
   icon: JSX.Element;
   text: string;
+  onClick?: () => void;
 }) => {
   return (
-    <div className="flex items-center cursor-pointer gap-2 justify-center text-white ">
+    <div
+      className="flex items-center cursor-pointer gap-2 justify-center text-white "
+      onClick={onClick}
+    >
       {icon} <span className="text-[13px] font-[500]">{text}</span>
     </div>
   );

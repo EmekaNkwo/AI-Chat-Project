@@ -1,6 +1,6 @@
 import { baseUrl } from "@/util/apiConfig";
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 interface IMessage {
   text: string;
