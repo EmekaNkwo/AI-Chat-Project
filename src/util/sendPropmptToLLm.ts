@@ -12,8 +12,6 @@ export async function sendPromptToLLM(prompt: string) {
         temperature: 0.7, // Adjust temperature for creativity level
       },
     });
-    console.log(response);
-
     return response.generated_text;
   } catch (error) {
     console.error("Error communicating with the LLM:", error);
