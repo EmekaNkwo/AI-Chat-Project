@@ -47,7 +47,7 @@ const ChatApp: React.FC = () => {
       <div className="flex flex-col gap-2 p-4">
         <div
           ref={messageContainerRef}
-          className="max-h-[73vh] min-h-[71vh] w-[74%] mb-3 mx-auto overflow-y-auto"
+          className="max-h-[72vh] lg:min-h-[68vh] w-[74%] mb-3 mx-auto overflow-y-auto"
         >
           {messages?.map((msg, i) => (
             <div key={i}>
