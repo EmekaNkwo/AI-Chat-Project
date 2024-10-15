@@ -4,7 +4,7 @@ const hf = new HfInference(`${process.env.NEXT_PUBLIC_TOKEN}`);
 export async function sendPromptToLLM(prompt: string) {
   try {
     const response = await hf.textGeneration({
-      model: "mistralai/Mistral-7B-Instruct-v0.2", // Replace with your preferred Hugging Face model ID
+      model: "mistralai/Mistral-7B-Instruct-v0.2",
       inputs: prompt,
 
       parameters: {
