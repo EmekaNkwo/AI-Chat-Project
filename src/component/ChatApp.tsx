@@ -94,6 +94,9 @@ const ChatApp: React.FC = () => {
         </div>
 
         <div className="mx-auto">
+          {isLoading ? (
+            <span className="text-[#E4E4E4] my-2">Generating...</span>
+          ) : null}
           <ChatInput
             onSubmit={handleSend}
             text={userInput}

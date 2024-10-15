@@ -21,6 +21,7 @@ const useChatPage = () => {
     setIsLoading(true);
     setError("");
 
+    abortControllerRef.current = new AbortController();
     const response = await sendToLLM(userInput);
     setMessages([
       ...messages,
@@ -29,6 +30,7 @@ const useChatPage = () => {
     ]);
     setUserInput("");
     setIsLoading(false);
+    abortControllerRef.current = null;
   };
   const sendToLLM = async (input: string) => {
     const textWithoutHtml = input.replace(/<[^>]*>/g, "");

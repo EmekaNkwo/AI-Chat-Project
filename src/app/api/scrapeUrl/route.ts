@@ -32,8 +32,6 @@ export async function POST(req: Request) {
 
     const includeUrlPattern = /\[include-url:\s*\[([^\]]+)\]\s*.*?\]/g;
     const urls = [...updatedPrompt.matchAll(includeUrlPattern)];
-    // const { url } = await req.json();
-    // const { data } = await axios.get(url);
 
     for (const url of urls) {
       const scrapedContent = await scrapeContent(url[1]);
