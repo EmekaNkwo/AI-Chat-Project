@@ -26,7 +26,11 @@ const ChatInput: React.FC<{
   return (
     <>
       {openModal && (
-        <CommandModal isModalOpen={openModal} setIsModalOpen={setOpenModal} />
+        <CommandModal
+          isModalOpen={openModal}
+          setIsModalOpen={setOpenModal}
+          setText={setText}
+        />
       )}
       <div className="flex flex-col gap-2">
         <div className="flex items-center w-full border border-[#2D2D2D] p-2 rounded-[8px]">
