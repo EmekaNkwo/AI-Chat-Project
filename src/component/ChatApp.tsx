@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ChatInput from "./ChatInput";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
@@ -30,13 +30,25 @@ const ChatApp: React.FC = () => {
     Prism.highlightAll();
   }, [messages]);
 
-  console.log(messages);
+  const messageContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTo({
+        top: messageContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
 
   return (
     <>
       <HeaderSelection />
       <div className="flex flex-col gap-2 p-4">
-        <div className="max-h-[73vh] min-h-[71vh] w-[74%] mb-3 mx-auto overflow-y-auto">
+        <div
+          ref={messageContainerRef}
+          className="max-h-[73vh] min-h-[71vh] w-[74%] mb-3 mx-auto overflow-y-auto"
+        >
           {messages?.map((msg, i) => (
             <div key={i}>
               <div
@@ -95,7 +107,9 @@ const ChatApp: React.FC = () => {
 
         <div className="mx-auto">
           {isLoading ? (
-            <span className="text-[#E4E4E4] my-2">Generating...</span>
+            <span className="text-[#E4E4E4] text-[1wpx] my-2">
+              Generating...
+            </span>
           ) : null}
           <ChatInput
             onSubmit={handleSend}
