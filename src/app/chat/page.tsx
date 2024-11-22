@@ -1,8 +1,4 @@
-import dynamic from "next/dynamic";
-
-const ChatApp = dynamic(() => import("@/component/ChatApp"), {
-  ssr: false,
-});
+import ChatApp from "@/component/ChatApp";
 const Page = () => {
   return (
     <>

@@ -11,14 +11,14 @@ import ReactQuill from "react-quill";
 import CommandModal from "./CommandModal";
 
 const ChatInput: React.FC<{
-  onSubmit: () => void;
+  onSubmit?: () => void;
   isLoading?: boolean;
-  stopGeneration: () => void;
+  stopGeneration?: () => void;
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ onSubmit, isLoading, stopGeneration, text, setText }) => {
   const handleSubmit = () => {
-    onSubmit();
+    onSubmit?.();
     setText("");
   };
   const [openModal, setOpenModal] = React.useState(false);
@@ -39,7 +39,7 @@ const ChatInput: React.FC<{
             theme=""
             onChange={setText}
             placeholder="Type '/' for quick access to the command menu. Use '||' to enter multiple prompts."
-            className="w-[55vw] text-[#797979] placeholder:text-[#797979]"
+            className="w-[55vw] text-white placeholder:text-white"
             modules={{ toolbar: false }}
           />
           {isLoading ? (

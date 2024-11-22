@@ -1,6 +1,6 @@
 import { baseUrl } from "@/util/apiConfig";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface IMessage {
   text: string;
@@ -11,10 +11,13 @@ const URL = `${baseUrl}/api`;
 const useChatPage = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [userInput, setUserInput] = useState("");
-  //   const [isGenerating, setIsGenerating] = useState(false);
+  const [textForEdit, setTextForEdit] = useState("");
+  const [pendingMessage, setPendingMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isEditMode, setIsEditMode] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   const handleSend = async () => {
     if (!userInput.trim()) return;
@@ -23,11 +26,23 @@ const useChatPage = () => {
 
     abortControllerRef.current = new AbortController();
     const response = await sendToLLM(userInput);
-    setMessages([
-      ...messages,
-      { text: userInput, isUser: true },
-      { text: response, isUser: false },
-    ]);
+    if (isEditMode) {
+      // Replace the edited message and add new LLM response
+      const newMessages = [...messages];
+      newMessages[currentMessageIndex] = { text: userInput, isUser: true };
+      // Remove any subsequent messages and add new LLM response
+      newMessages.splice(currentMessageIndex + 1);
+      newMessages.push({ text: response, isUser: false });
+      setMessages(newMessages);
+      setIsEditMode(false); // Reset edit mode
+    } else {
+      // Normal message flow
+      setMessages([
+        ...messages,
+        { text: userInput, isUser: true },
+        { text: response, isUser: false },
+      ]);
+    }
     setUserInput("");
     setIsLoading(false);
     abortControllerRef.current = null;
@@ -57,11 +72,29 @@ const useChatPage = () => {
   };
 
   const handleEdit = (index: number) => {
-    const messageToEdit = messages[index].text;
-    setUserInput(messageToEdit);
-    // Remove the message being edited from the list
-    setMessages(messages.filter((_, i) => i !== index));
+    const messageToEdit = messages[index];
+    // Only allow editing user messages
+    if (!messageToEdit.isUser) return;
+    setIsEditMode(true);
+    setUserInput(messageToEdit.text);
+    setCurrentMessageIndex(index);
+    
+    // Clear any pending operations
+    setPendingMessage("");
+    if (isLoading) {
+      stopGeneration();
+    }
   };
+  const handleSubmit = () => {
+    setPendingMessage(userInput);
+    handleSend();
+  };
+  
+  useEffect(() => {
+    if (!isLoading) {
+      setPendingMessage("");
+    }
+  }, [isLoading]);
   return {
     messages,
     userInput,
@@ -72,6 +105,9 @@ const useChatPage = () => {
     sendToLLM,
     stopGeneration,
     handleEdit,
+    pendingMessage,
+    handleSubmit,
+    textForEdit, setTextForEdit
   };
 };
 

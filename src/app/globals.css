@@ -6,10 +6,6 @@ body {
   background: #121212;
 }
 
-.ql-container {
+.quill > .ql-container > .ql-editor.ql-blank::before{
   color: #797979;
-}
-
-.ql-editor {
-  color: #e4e4e4; /* Text color */
 }

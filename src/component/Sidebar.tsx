@@ -4,6 +4,7 @@ import { Menu, Progress } from "antd";
 import { bottomSidebarItems, topSidebarItems } from "@/shared/constant";
 import IconLogo from "@/assets/IconLogo";
 import { MdAdd } from "react-icons/md";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const Sidebar = (): JSX.Element => {
   const handleMenuClick = (key: string) => {
@@ -34,6 +35,7 @@ const Sidebar = (): JSX.Element => {
             if (item.children) {
               return (
                 <Menu.SubMenu
+                  expandIcon={<IoMdArrowDropdown color="#fff" size={18} />}
                   className="text-white my-[1rem] "
                   key={item.key}
                   title={
