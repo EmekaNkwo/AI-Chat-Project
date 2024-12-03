@@ -12,7 +12,7 @@ const HeaderSelection = () => {
   return (
     <div className="p-4 border-[#202020] border-b-[2px] flex justify-between items-center">
       <div className="flex gap-2 items-center text-[#E4E4E4]">
-        <span className="">Front-End Task</span>
+        <span className="">AI Chat App</span>
         <BiSolidEdit />
       </div>
       <div className="flex">

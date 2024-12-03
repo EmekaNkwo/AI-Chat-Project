@@ -1,4 +1,4 @@
-# UNIC Project [Live Demo](https://nicosia.vercel.app/)
+# AI Chat Project [Live Demo](https://nicosia.vercel.app/)
 
 This project is an interactive web-based chat application that allows users to communicate with a Large Language Model (LLM) via a friendly and intuitive interface. Built with Next.js, Tailwind CSS, and Hugging Face Model - "mistralai/Mistral-7B-Instruct-v0.2
 
