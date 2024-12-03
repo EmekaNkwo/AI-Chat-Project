@@ -25,7 +25,7 @@ export async function sendPromptToLLM(prompt: string) {
       },
     });
 
-    let cleanedResponse = response.generated_text
+    const cleanedResponse = response.generated_text
       .replace(formattedPrompt, "")
       .replace(/<s>|<\/s>|\[INST\]|\[\/INST\]/g, "")
       .trim();
