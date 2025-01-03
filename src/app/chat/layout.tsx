@@ -3,7 +3,7 @@ import Sidebar from "@/component/Sidebar";
 import Topbar from "@/component/Topbar";
 import React from "react";
 
-const Template = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <div className="flex h-screen items-start w-full">
@@ -17,4 +17,4 @@ const Template = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Template;
+export default Layout;

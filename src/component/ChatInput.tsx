@@ -1,12 +1,9 @@
 "use client";
 import IconSend from "@/assets/IconSend";
-import { IconWithText } from "@/shared/UIs";
-import { Progress } from "antd";
+
 import React from "react";
 import { FaStopCircle } from "react-icons/fa";
-import { MdAdd, MdPerson } from "react-icons/md";
-import { PiQuotesFill } from "react-icons/pi";
-import { RiSlashCommands2 } from "react-icons/ri";
+
 import ReactQuill from "react-quill";
 import CommandModal from "./CommandModal";
 
@@ -23,6 +20,13 @@ const ChatInput: React.FC<{
   };
   const [openModal, setOpenModal] = React.useState(false);
 
+  const handlePressEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <>
       {openModal && (
@@ -35,10 +39,11 @@ const ChatInput: React.FC<{
       <div className="flex flex-col gap-2">
         <div className="flex items-center w-full border border-[#2D2D2D] p-2 rounded-[8px]">
           <ReactQuill
+            onKeyDown={handlePressEnter}
             value={text}
             theme=""
             onChange={setText}
-            placeholder="Type '/' for quick access to the command menu. Use '||' to enter multiple prompts."
+            placeholder="What can i do for you?"
             className="w-[55vw] text-white placeholder:text-white"
             modules={{ toolbar: false }}
           />
@@ -62,7 +67,7 @@ const ChatInput: React.FC<{
             </>
           )}
         </div>
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <div className="flex items-start gap-4 mt-2">
             <IconWithText
               icon={<RiSlashCommands2 />}
@@ -90,7 +95,7 @@ const ChatInput: React.FC<{
               className="transform rotate-90"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

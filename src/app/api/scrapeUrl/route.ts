@@ -58,31 +58,6 @@ export async function POST(req: Request) {
         }
       );
     }
-
-    // const $ = cheerio?.load(data);
-    // $("script, style").remove();
-
-    // const rawText = $("body").text().replace(/\s+/g, " ").trim();
-
-    // if (rawText === null) {
-    //   return new NextResponse(
-    //     JSON.stringify({
-    //       status: "Failed",
-    //       message: "Failed to scrape website",
-    //     }),
-    //     {
-    //       status: 500,
-    //     }
-    //   );
-    // }
-    // return new NextResponse(
-    //   JSON.stringify({
-    //     response: `${rawText}`,
-    //   }),
-    //   {
-    //     status: 200,
-    //   }
-    // );
   } catch (error) {
     console.error("Error in API route:", error);
 
